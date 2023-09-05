@@ -37,8 +37,12 @@ export const drawChart = (
     .attr("cx", (d) => xScale(d.gdp_cap))
     .attr("cy", (d) => yScale(d.life_exp))
     .attr("r", (d) => rScale(d.population))
-    .attr("opacity", 1)
-    .attr("fill", (d) => colorScale(d.continent));
+    .attr("opacity", (d) => (d.continent === selectedContinent ? 1 : 0.3))
+    .attr("fill", (d) =>
+      colorPoint(selectedContinent, d.continent)
+        ? colorScale(d.continent)
+        : "grey"
+    );
 
   // axes
   SVG.selectAll("g").remove();
@@ -69,4 +73,8 @@ export const drawChart = (
     .attr("x2", width - margin.right)
     .attr("y1", d3.mean(chartData, (d) => yScale(d.life_exp)) as number)
     .attr("y2", d3.mean(chartData, (d) => yScale(d.life_exp)) as number);
+};
+
+const colorPoint = (selectedContinent: string, continent: string) => {
+  return selectedContinent === continent;
 };
