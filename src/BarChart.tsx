@@ -44,10 +44,33 @@ const BarChart = ({ width, height, data }: BarChartProps) => {
     </text>
   ));
 
+  const lines = [10, 20, 30, 40];
+  const gridLines = lines.map((l) => (
+    <g key={l}>
+      <line
+        x1={xScale(l)}
+        x2={xScale(l)}
+        y1={0}
+        y2={height - margin}
+        stroke="white"
+      />
+      <text
+        x={xScale(l)}
+        y={height - 5}
+        textAnchor="middle"
+        fontSize={12}
+        fontWeight={500}
+      >
+        {l}
+      </text>
+    </g>
+  ));
+
   return (
     <svg viewBox={`0 0 ${width} ${height}`}>
       {rectangles}
       {labels}
+      {gridLines}
     </svg>
   );
 };
