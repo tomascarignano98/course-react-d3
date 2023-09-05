@@ -10,18 +10,21 @@ const Circles = ({ width, height }: CirclesProps) => {
 
   useEffect(() => {
     if (!svgRef.current) return;
+
+    const MAX_RADIUS = 40;
     const svg = d3.select(svgRef.current);
 
     const xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
     const yScale = d3.scaleLinear().domain([0, 1]).range([0, height]);
+    const rScale = d3.scaleLinear().domain([0, 1]).range([0, MAX_RADIUS]);
 
     svg
       .selectAll("circle")
       .data(data)
       .attr("cx", (d) => xScale(d.x))
       .attr("cy", (d) => yScale(d.y))
-      .attr("r", 5)
-      .attr("fill", "black");
+      .attr("r", (d) => rScale(d.r))
+      .attr("fill", (d) => colors[d.color]);
   }, [data, width, height]);
 
   return (
@@ -46,3 +49,5 @@ const Circles = ({ width, height }: CirclesProps) => {
 };
 
 export default Circles;
+
+const colors = ["#2176ae", "#57b8ff", "#b66d0d", "#fbb13c", "#fe6847"];
