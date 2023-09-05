@@ -47,10 +47,10 @@ function Circles({
 
   // this just attaches circles to the DOM - it doesn't actually set their size, color, or position
   return (
-    <svg viewBox={`0 0 ${width} ${height}`}>
-      {/* {chartData.map((d) => (
-
-    ))} */}
+    <svg ref={svgRef} viewBox={`0 0 ${width} ${height}`}>
+      {chartData.map((d) => (
+        <circle key={d.country} />
+      ))}
     </svg>
   );
 }

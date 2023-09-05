@@ -28,4 +28,15 @@ export const drawChart = (
     .scaleSqrt()
     .domain(d3.extent(data, (d) => d.population) as [number, number])
     .range([1, MAX_RADIUS]);
+
+  // circles
+  SVG.selectAll("circle")
+    .data(chartData)
+    .transition()
+    .duration(500)
+    .attr("cx", (d) => xScale(d.gdp_cap))
+    .attr("cy", (d) => yScale(d.life_exp))
+    .attr("r", (d) => rScale(d.population))
+    .attr("opacity", 1)
+    .attr("fill", (d) => colorScale(d.continent));
 };
