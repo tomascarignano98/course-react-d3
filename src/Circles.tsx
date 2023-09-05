@@ -21,6 +21,8 @@ const Circles = ({ width, height }: CirclesProps) => {
     svg
       .selectAll("circle")
       .data(data)
+      .transition()
+      .duration(900)
       .attr("cx", (d) => xScale(d.x))
       .attr("cy", (d) => yScale(d.y))
       .attr("r", (d) => rScale(d.r))
