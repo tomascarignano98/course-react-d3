@@ -39,4 +39,17 @@ export const drawChart = (
     .attr("r", (d) => rScale(d.population))
     .attr("opacity", 1)
     .attr("fill", (d) => colorScale(d.continent));
+
+  // axes
+  SVG.selectAll("g").remove();
+
+  SVG.append("g")
+    .call(d3.axisBottom(xScale))
+    .attr("transform", `translate(0, ${height - margin.bottom})`)
+    .call((g) => g.select(".domain").remove());
+
+  SVG.append("g")
+    .call(d3.axisLeft(yScale).ticks(5))
+    .attr("transform", `translate(${margin.left}, 0)`)
+    .call((g) => g.select(".domain").remove());
 };

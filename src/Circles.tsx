@@ -51,6 +51,26 @@ function Circles({
       {chartData.map((d) => (
         <circle key={d.country} />
       ))}
+
+      <text
+        fill="grey"
+        fontSize={48}
+        x={width - margin.right - 150}
+        y={height - margin.bottom - 50}
+      >
+        {year}
+      </text>
+
+      <text fill="grey" x={20} y={height - 10}>
+        GDP per Capita
+      </text>
+
+      <text
+        fill="grey"
+        transform={`translate(20, ${margin.top + 100}) rotate(-90)`}
+      >
+        Life Expectancy
+      </text>
     </svg>
   );
 }
