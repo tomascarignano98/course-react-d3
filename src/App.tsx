@@ -2,9 +2,10 @@ import { useState } from "react";
 import "./App.css";
 import BarChart from "./BarChart";
 import sunshine from "./sunshine.json";
+import Select from "react-select";
 
 function App() {
-  const [month] = useState(selectOptions[0]);
+  const [month, setMonth] = useState(selectOptions[0]);
 
   const data = sunshine
     .map((d) => ({ city: d.CITY, sunshine: d[month.value] as number }))
@@ -13,8 +14,15 @@ function App() {
 
   return (
     <div className="App">
-      <div className="header"></div>
       <div className="container">
+        <div className="header">
+          <h1>Sunshine By City</h1>
+          <Select
+            options={selectOptions}
+            defaultValue={month}
+            onChange={(option) => setMonth(option as Option)}
+          />
+        </div>
         <BarChart width={900} height={600} data={data} />
       </div>
     </div>
