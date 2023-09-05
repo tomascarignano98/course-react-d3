@@ -31,7 +31,25 @@ const BarChart = ({ width, height, data }: BarChartProps) => {
     />
   ));
 
-  return <svg viewBox={`0 0 ${width} ${height}`}>{rectangles}</svg>;
+  const labels = data.map((d) => (
+    <text
+      key={d.city}
+      x={xScale(d.sunshine)}
+      textAnchor="end"
+      y={(yScale(d.city) ?? 0) + 20}
+      fill="white"
+      fontWeight={500}
+    >
+      {d.city}
+    </text>
+  ));
+
+  return (
+    <svg viewBox={`0 0 ${width} ${height}`}>
+      {rectangles}
+      {labels}
+    </svg>
+  );
 };
 
 export default BarChart;
