@@ -52,4 +52,17 @@ export const drawChart = (
     .call(d3.axisLeft(yScale).ticks(5))
     .attr("transform", `translate(${margin.left}, 0)`)
     .call((g) => g.select(".domain").remove());
+
+  // average lines
+  SVG.select(".gdp-avg")
+    .attr("x1", d3.mean(chartData, (d) => xScale(d.gdp_cap)) as number)
+    .attr("x2", d3.mean(chartData, (d) => xScale(d.gdp_cap)) as number)
+    .attr("y1", margin.top)
+    .attr("y2", height - margin.bottom);
+
+  SVG.select(".life-avg")
+    .attr("x1", margin.left)
+    .attr("x2", width - margin.right)
+    .attr("y1", d3.mean(chartData, (d) => yScale(d.life_exp)) as number)
+    .attr("y2", d3.mean(chartData, (d) => yScale(d.life_exp)) as number);
 };
