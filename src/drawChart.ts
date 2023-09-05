@@ -55,12 +55,16 @@ export const drawChart = (
 
   // average lines
   SVG.select(".gdp-avg")
+    .transition()
+    .duration(500)
     .attr("x1", d3.mean(chartData, (d) => xScale(d.gdp_cap)) as number)
     .attr("x2", d3.mean(chartData, (d) => xScale(d.gdp_cap)) as number)
     .attr("y1", margin.top)
     .attr("y2", height - margin.bottom);
 
   SVG.select(".life-avg")
+    .transition()
+    .duration(500)
     .attr("x1", margin.left)
     .attr("x2", width - margin.right)
     .attr("y1", d3.mean(chartData, (d) => yScale(d.life_exp)) as number)
