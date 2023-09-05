@@ -17,9 +17,21 @@ const BarChart = ({ width, height, data }: BarChartProps) => {
   const yScale = d3
     .scaleBand()
     .domain(data.map((d) => d.city))
-    .range([height - 2 * margin, 0]);
+    .range([0, height - 2 * margin]);
 
-  return <svg viewBox={`0 0 ${width} ${height}`}></svg>;
+  const rectangles = data.map((d) => (
+    <rect
+      key={d.city}
+      x={margin}
+      y={yScale(d.city)}
+      width={xScale(d.sunshine)}
+      height={yScale.bandwidth()}
+      fill="darkorange"
+      stroke="white"
+    />
+  ));
+
+  return <svg viewBox={`0 0 ${width} ${height}`}>{rectangles}</svg>;
 };
 
 export default BarChart;
