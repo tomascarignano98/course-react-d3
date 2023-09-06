@@ -37,7 +37,9 @@ export const drawChart = (
     .attr("cx", (d) => xScale(d.gdp_cap))
     .attr("cy", (d) => yScale(d.life_exp))
     .attr("r", (d) => rScale(d.population))
-    .attr("opacity", (d) => (d.continent === selectedContinent ? 1 : 0.3))
+    .attr("opacity", (d) =>
+      colorPoint(selectedContinent, d.continent) ? 1 : 0.3
+    )
     .attr("fill", (d) =>
       colorPoint(selectedContinent, d.continent)
         ? colorScale(d.continent)
@@ -76,5 +78,5 @@ export const drawChart = (
 };
 
 const colorPoint = (selectedContinent: string, continent: string) => {
-  return selectedContinent === continent;
+  return selectedContinent === "all" || selectedContinent === continent;
 };
